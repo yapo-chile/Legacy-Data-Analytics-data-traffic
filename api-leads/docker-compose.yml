@@ -1,0 +1,8 @@
+version: '2'
+services:
+  app:
+    image: bi.etl.xiti.leads:1.0
+    container_name: bi.etl.xiti.leads.container
+    build: .
+    ports:
+      - "3000:3000"
