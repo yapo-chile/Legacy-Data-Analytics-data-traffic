@@ -6,16 +6,15 @@ import json
 import os
 import logging
 import time
+import environ
 from optparse import OptionParser
-from conf import Conf
+from config import AppConfig
 
-
+config = environ.to_config(AppConfig)
 logger = logging.getLogger('api_leads')
 
 
 def main():
-    #log_file = '/opt/dw_schibsted/yapo_bi/dw_blocketdb/logs/%s_api_leads.log' % time.strftime(
-    #    '%y.%m.%d.%H.%M.%S')
     logging.basicConfig(
         level=logging.INFO
     )
@@ -25,7 +24,7 @@ def main():
     start = params[1]
     end = params[2]
 
-    headers = {'authorization': "Basic %s" % config['authorization']}
+    headers = {'authorization': "Basic %s" % config.xiti.authorization}
 
     logger.info('Using the following period')
     logger.info('Period: %s' % period)
@@ -34,17 +33,17 @@ def main():
 
     # MSITE
     logger.info('Starting to get data for msite platform')
-    get_leads_data(headers, config['site_msite'], config['columns_msite'],
-                   config['filter_msite'], period, start, end)
+    get_leads_data(headers, config.xiti.site_msite, config.xiti.columns_msite,
+                   config.xiti.filter_msite, period, start, end)
     # ANDROID
-    """ logger.info('Starting to get data for android platform')
-    get_leads_data(headers, config['site_android'], config['columns_android'],
-                   config['filter_android'], period, start, end)
+    logger.info('Starting to get data for android platform')
+    get_leads_data(headers, config.xiti.site_android, config.xiti.columns_android,
+                   config.xiti.filter_android, period, start, end)
     # IOS
     logger.info('Starting to get data for ios platform')
-    get_leads_data(headers, config['site_ios'], config['columns_ios'],
-                   config['filter_ios'], period, start, end)
- """
+    get_leads_data(headers, config.xiti.site_ios, config.xiti.columns_ios,
+                   config.xiti.filter_ios, period, start, end)
+
     logger.info('Ending process at %s' % time.strftime('%Y-%m-%d %H:%M:%S'))
 
 
@@ -53,10 +52,10 @@ def delete_table(period):
     conn = ""
     try:
         conn = psycopg2.connect("dbname=%s user=%s host=%s password=%s" % (
-            config['db_name'],
-            config['db_user'],
-            config['db_host'],
-            config['db_password']))
+            config.db.name,
+            config.db.user,
+            config.db.host,
+            config.db.password))
     except Exception as e:
         logger.error('Error connecting to database!')
         logger.error('Error:\n%s', e)
@@ -80,16 +79,16 @@ def get_leads_data(headers, site, columns, filter, month_id, start, end):
     conn = ""
     try:
         conn = psycopg2.connect("dbname=%s user=%s host=%s password=%s" % (
-            config['db_name'], config['db_user'], config['db_host'], config['db_password']))
-    except Exception as e:
+            config.db.name, config.db.user, config.db.host, config.db.password))
+    except Exception:
         logger.error('Error connecting to database!')
         exit
     cur = conn.cursor()
 
     # url de xiti
-    url_base = config['api_url_data']
+    url_base = config.xiti.api_url_data
     columns = "%s" % columns
-    sort = "%s" % config['sort']
+    sort = "%s" % config.xiti.sort
     filter = "%s" % filter
     space = "{s:%s}" % site
     period = "{D:{start:'%s',end:'%s'}}" % (start, end)
@@ -139,40 +138,5 @@ def get_params():
     return params
 
 
-def get_config():
-    logger.info('Getting configuration variables')
-    conf = Conf(os.path.join("/","work", "data-traffic", "api-leads", "resources", "leads.config"))
-    if conf is None:
-        logger.info('ERROR: Configuration file not found')
-        print("Configuration file not found")
-        exit()
 
-    config = {
-        'authorization'		: conf.get("authorization"),
-        'api_url_data'		: conf.get("api_url_data"),
-        'site_msite'		: conf.get("site_msite"),
-        'site_android'		: conf.get("site_android"),
-        'site_ios'			: conf.get("site_ios"),
-        'columns_msite'		: conf.get("columns_msite"),
-        'columns_android'	: conf.get("columns_android"),
-        'columns_ios'		: conf.get("columns_ios"),
-        'filter_msite'		: conf.get("filter_msite"),
-        'filter_android'	: conf.get("filter_android"),
-        'filter_ios'		: conf.get("filter_ios"),
-        'sort'				: conf.get("sort"),
-        'db_name'			: conf.get("db_name"),
-        'db_user'			: conf.get("db_user"),
-        'db_host'			: conf.get("db_host"),
-        'db_password'		: conf.get("db_password")
-    }
-
-    for c in config:
-        if c is None:
-            logger.info('ERROR: One or more configuration are missing')
-            print("ERROR: One or more configuration are missing")
-            exit()
-
-    return config
-
-config = get_config()
 main()

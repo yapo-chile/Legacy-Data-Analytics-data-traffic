@@ -1,7 +1,4 @@
-#!/bin/bash
-
 flag_reprocess=0
-base_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 for i in "$@"
 do
@@ -49,5 +46,4 @@ echo $month
 echo $start
 echo $end
 
-
-python3.5 ${base_dir}/../src/main.py $month $start $end
+echo "docker-compose run app $month $start $end"
