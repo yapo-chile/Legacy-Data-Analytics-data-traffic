@@ -1,5 +1,4 @@
 requests
-psycopg2
 psycopg2-binary
 pycodestyle
 environ-config

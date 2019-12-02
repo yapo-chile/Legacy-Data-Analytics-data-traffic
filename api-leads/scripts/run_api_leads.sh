@@ -50,4 +50,4 @@ echo $start
 echo $end
 
 
-python3.5 ${base_dir}/../src/main.py $month $start $end
+python3.7 ${base_dir}/../src/main.py $month $start $end
