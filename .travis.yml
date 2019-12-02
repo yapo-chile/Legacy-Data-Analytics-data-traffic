@@ -1,0 +1,37 @@
+dist: trusty
+language: python
+
+python:
+  - "3.7"
+
+# This build should not be triggered by tags
+if: tags IS blank
+
+# Anything in install that returns a nonzero exit code will
+# flunk the build and immediately stop. It's sorta like having
+# set -e enabled in bash.
+install:
+  # run the initial setup
+  # Installing dependencies
+  - pip install -r api_leads/resources/requirements.txt
+  # Export the current branch according to travis (including pr builds) 
+  - export BUILD_BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
+
+# script always run to completion (set +e). All of these code checks are must haves
+# in a modern Go project.
+script:
+        - docker build -f api_leads/Dockerfile -t containers.mpi-internal.com/yapo/data_postgres:${BUILD_BRANCH}
+
+after_failure:
+  - reports-publisher
+
+after_success:
+  - reports-publisher
+
+deploy:
+  - provider: script
+    script: 
+      - container_cache login --username "${ARTIFACTORY_USER}" --password "${ARTIFACTORY_PWD}" containers.mpi-internal.com/yapo 
+      - container_cache push containers.mpi-internal.com/yapo/data_postgres:${BUILD_BRANCH}
+    on:
+      all_branches: true
