@@ -15,7 +15,7 @@ if: tags IS blank
 install:
   # run the initial setup
   # Installing dependencies
-  - pip install -r api_leads/resources/requirements.txt
+  - pip install -r ./api_leads/resources/requirements.txt
   # Export the current branch according to travis (including pr builds) 
 
 before_script:
