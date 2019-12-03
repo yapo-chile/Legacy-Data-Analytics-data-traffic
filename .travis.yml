@@ -7,6 +7,12 @@ python:
 # This build should not be triggered by tags
 if: tags IS blank
 
+matrix:
+  include:
+    - python: 3.7
+      dist: xenial
+      sudo: true
+
 # Anything in install that returns a nonzero exit code will
 # flunk the build and immediately stop. It's sorta like having
 # set -e enabled in bash.
