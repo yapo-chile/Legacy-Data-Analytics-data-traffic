@@ -13,67 +13,6 @@ from config import AppConfig
 config = environ.to_config(AppConfig)
 logger = logging.getLogger('api_leads')
 
-
-def main():
-    logging.basicConfig(
-        level=logging.INFO
-    )
-    logger.info('Starting process at %s' % time.strftime('%Y-%m-%d %H:%M:%S'))
-    params = get_params()
-    period = params[0]
-    start = params[1]
-    end = params[2]
-
-    headers = {'authorization': "Basic %s" % config.xiti.authorization}
-
-    logger.info('Using the following period')
-    logger.info('Period: %s' % period)
-
-    delete_table(period)
-
-    # MSITE
-    logger.info('Starting to get data for msite platform')
-    get_leads_data(headers, config.xiti.site_msite, config.xiti.columns_msite,
-                   config.xiti.filter_msite, period, start, end)
-    # ANDROID
-    logger.info('Starting to get data for android platform')
-    get_leads_data(headers, config.xiti.site_android, config.xiti.columns_android,
-                   config.xiti.filter_android, period, start, end)
-    # IOS
-    logger.info('Starting to get data for ios platform')
-    get_leads_data(headers, config.xiti.site_ios, config.xiti.columns_ios,
-                   config.xiti.filter_ios, period, start, end)
-
-    logger.info('Ending process at %s' % time.strftime('%Y-%m-%d %H:%M:%S'))
-
-
-def delete_table(period):
-    logger.info('Connecting to database...')
-    conn = ""
-    try:
-        conn = psycopg2.connect("dbname=%s user=%s host=%s password=%s" % (
-            config.db.name,
-            config.db.user,
-            config.db.host,
-            config.db.password))
-    except Exception as e:
-        logger.error('Error connecting to database!')
-        logger.error('Error:\n%s', e)
-        exit(1)
-    cur = conn.cursor()
-    try:
-        query = "delete from stg.fact_month_ad_reply_type_xiti where month_id = '%s'" % period
-        cur.execute(query)
-        logger.info('Table deleted for period %s' % period)
-
-        conn.commit()
-        cur.close()
-        conn.close()
-    except psycopg2.errors.UndefinedTable:
-        logger.warn('Table doesnt exits. skip delete')
-        return
-
-
 def get_leads_data(headers, site, columns, filter, month_id, start, end):
     logger.info('Starting to get data from Xiti API...')
     conn = ""
@@ -128,6 +67,33 @@ def get_leads_data(headers, site, columns, filter, month_id, start, end):
     conn.close()
 
 
+def delete_entries(period):
+    logger.info('Connecting to database...')
+    conn = ""
+    try:
+        conn = psycopg2.connect("dbname=%s user=%s host=%s password=%s" % (
+            config.db.name,
+            config.db.user,
+            config.db.host,
+            config.db.password))
+    except Exception as e:
+        logger.error('Error connecting to database!')
+        logger.error('Error:\n%s', e)
+        exit(1)
+    cur = conn.cursor()
+    try:
+        query = "delete from stg.fact_month_ad_reply_type_xiti where month_id = '%s'" % period
+        cur.execute(query)
+        logger.info('Table deleted for period %s' % period)
+
+        conn.commit()
+        cur.close()
+        conn.close()
+    except psycopg2.errors.UndefinedTable:
+        logger.warn('Table doesnt exits. skip delete')
+        return
+
+
 def get_params():
     parser = OptionParser('usage: %prog month start end')
     (options, params) = parser.parse_args()
@@ -138,4 +104,34 @@ def get_params():
     return params
 
 
-main()
+if __name__ == "__main__":
+    logging.basicConfig(
+        level=logging.INFO
+    )
+    logger.info('Starting process at %s' % time.strftime('%Y-%m-%d %H:%M:%S'))
+    params = get_params()
+    period = params[0]
+    start = params[1]
+    end = params[2]
+
+    headers = {'authorization': "Basic %s" % config.xiti.authorization}
+
+    logger.info('Using the following period')
+    logger.info('Period: %s' % period)
+
+    delete_entries(period)
+
+    # MSITE
+    logger.info('Starting to get data for msite platform')
+    get_leads_data(headers, config.xiti.site_msite, config.xiti.columns_msite,
+                   config.xiti.filter_msite, period, start, end)
+    # ANDROID
+    logger.info('Starting to get data for android platform')
+    get_leads_data(headers, config.xiti.site_android, config.xiti.columns_android,
+                   config.xiti.filter_android, period, start, end)
+    # IOS
+    logger.info('Starting to get data for ios platform')
+    get_leads_data(headers, config.xiti.site_ios, config.xiti.columns_ios,
+                   config.xiti.filter_ios, period, start, end)
+
+    logger.info('Ending process at %s' % time.strftime('%Y-%m-%d %H:%M:%S'))

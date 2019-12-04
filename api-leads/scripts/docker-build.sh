@@ -27,7 +27,7 @@ fi
 
 echoTitle "Building docker image for ${DOCKER_IMAGE}"
 echo "GIT BRANCH: ${GIT_BRANCH}"
-#echo "GIT TAG: ${GIT_TAG}"
+echo "GIT TAG: ${GIT_TAG}"
 echo "GIT COMMIT: ${GIT_COMMIT}"
 echo "GIT COMMIT SHORT: ${GIT_COMMIT_SHORT}"
 echo "BUILD CREATOR: ${BUILD_CREATOR}"

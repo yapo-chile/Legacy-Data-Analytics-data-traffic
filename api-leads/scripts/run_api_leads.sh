@@ -22,9 +22,7 @@ then
 	flag_reprocess=1
 fi
 
-
 d=$(date -d "`date`" +%d)
-#d=02
 
 if [ "$d" = "01" ]
 then
@@ -37,7 +35,6 @@ else
 	end=$(date -d "`date` -1 day" +%Y-%m-%d)
 fi
 
-
 if [ $flag_reprocess -eq 1 ]
 then
 	start=$DATE1_IN
@@ -48,6 +45,5 @@ fi
 echo $month
 echo $start
 echo $end
-
 
 python3.7 ${base_dir}/../src/main.py $month $start $end
