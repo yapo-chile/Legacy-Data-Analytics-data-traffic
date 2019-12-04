@@ -3,6 +3,7 @@ import environ
 
 @environ.config(prefix="APP")
 class AppConfig:
+
     @environ.config(prefix="XITI")
     class XitiConfig:
         authorization = environ.var("YmlfdGVhbUBzY2hpYnN0ZWQuY2w6Vzd4dnZuS2oqcUdOQ0B+ZA==")
@@ -18,6 +19,7 @@ class AppConfig:
         filter_msite = environ.var("{cl_142563:{$empty:false}}")
         filter_android = environ.var("{cl_351209:{$empty:false}}")
         filter_ios = environ.var("{cl_351195:{$empty:false}}")
+
     @environ.config(prefix="DB")
     class DBConfig:
         name = environ.var("dw_blocketdb_ch")
