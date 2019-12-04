@@ -26,11 +26,4 @@ after_failure:
 
 after_success:
   - reports-publisher
-
-deploy:
-  - provider: script
-    script: 
-      - container_cache login --username "${ARTIFACTORY_USER}" --password "${ARTIFACTORY_PWD}" containers.mpi-internal.com/yapo 
-      - make -C api-leads docker-publish
-    on:
-      all_branches: true
+  - make -C api-leads docker-publish
