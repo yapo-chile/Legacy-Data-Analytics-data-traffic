@@ -17,7 +17,6 @@ docker-build: build
 docker-publish:
 	@scripts/docker-publish.sh
 
-
 ## Execute the service
 remove:
 	docker stop ${APPNAME}
