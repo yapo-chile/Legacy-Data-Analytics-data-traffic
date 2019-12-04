@@ -1,4 +1,4 @@
-FROM python:3.5-buster
+FROM python:3.7-slim
 
 WORKDIR /work/
 
