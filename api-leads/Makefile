@@ -1,4 +1,4 @@
-include ../globals.mk
+-include ../globals.mk
 include scripts/vars.mk
 
 ## Deletes all containers
@@ -17,7 +17,7 @@ docker-build: build
 docker-publish:
 	@scripts/docker-publish.sh
 
-## Execute the service
+## Removes the service
 remove:
 	docker stop ${APPNAME}
 	docker rm ${APPNAME}
@@ -32,3 +32,7 @@ start-local:
 # Installs libraries locally
 install:
 	pip install -r resources/requirements.txt
+
+# Execute style tests
+check-style:
+	@scripts/check-style.sh

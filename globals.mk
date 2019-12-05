@@ -14,5 +14,8 @@ export SERVER_ROOT=${PWD}
 #DOCKER variables
 export DOCKER_REGISTRY=containers.mpi-internal.com
 
-BUILD_NAME=$(shell if [ -n "${GIT_TAG}" ]; then echo "${GIT_TAG}"; else echo "${GIT_BRANCH}"; fi;)
+export BUILD_NAME=$(shell if [ -n "${GIT_TAG}" ]; then echo "${GIT_TAG}"; else echo "${GIT_BRANCH}"; fi;)
 export BUILD_TAG=$(shell echo "${BUILD_NAME}" | tr '[:upper:]' '[:lower:]' | sed 's,/,_,g')
+
+# TRAVIS variables
+export REPORT_ARTIFACTS=reports
