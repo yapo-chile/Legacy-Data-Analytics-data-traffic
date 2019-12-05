@@ -1,0 +1,13 @@
+version: '2'
+services:
+  api_leads:
+    image: python:3.7-slim-buster
+    container_name: api_leads
+    networks:
+      - regress
+    volumes:
+      - .:/work/api_leads
+    command: "tail -f /dev/null"
+networks:
+  regress:
+    external: true
