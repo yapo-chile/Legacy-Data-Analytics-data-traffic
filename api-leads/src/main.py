@@ -1,3 +1,4 @@
+# pylint: disable=no-member
 import json
 import logging
 import time
@@ -6,19 +7,29 @@ from optparse import OptionParser
 import requests
 import psycopg2
 import environ
-from config import AppConfig
+from leads_config import AppConfig
 
 CONFIG = environ.to_config(AppConfig)
 LOGGER = logging.getLogger('api_leads')
 
-def get_leads_data(xiti_headers, site, columns, xiti_filter, month_id, xiti_start, xiti_end):
+
+def get_leads_data(
+        xiti_headers,
+        site,
+        columns,
+        xiti_filter,
+        month_id,
+        xiti_start,
+        xiti_end):
     LOGGER.info('Starting to get data from Xiti API...')
     conn = ""
     try:
-        conn = psycopg2.connect("dbname=%s user=%s host=%s password=%s" % (
-            CONFIG.db.name, CONFIG.db.user, CONFIG.db.host, CONFIG.db.password))
-    except Exception:
+        conn = psycopg2.connect(
+            "dbname=%s user=%s host=%s password=%s" %
+            (CONFIG.db.name, CONFIG.db.user, CONFIG.db.host, CONFIG.db.password))
+    except psycopg2.Error as e:
         LOGGER.error('Error connecting to database!')
+        LOGGER.error('Error:\n%s', e)
         sys.exit(1)
     cur = conn.cursor()
 
@@ -74,7 +85,7 @@ def delete_entries(xiti_period):
             CONFIG.db.user,
             CONFIG.db.host,
             CONFIG.db.password))
-    except Exception as e:
+    except psycopg2.Error as e:
         LOGGER.error('Error connecting to database!')
         LOGGER.error('Error:\n%s', e)
         sys.exit(1)
@@ -87,7 +98,7 @@ def delete_entries(xiti_period):
         conn.commit()
         cur.close()
         conn.close()
-    except psycopg2.errors.UndefinedTable:
+    except psycopg2.Error.UndefinedTable as e:
         LOGGER.error('Table doesnt exits. skip delete')
         return
 
@@ -95,7 +106,7 @@ def delete_entries(xiti_period):
 def get_params():
     parser = OptionParser('usage: %prog month start end')
     (_, command_params) = parser.parse_args()
-    if len(params) != 3:
+    if len(command_params) != 3:
         LOGGER.info('ERROR: Missing params')
         parser.error('Missing params')
 
@@ -125,8 +136,14 @@ if __name__ == "__main__":
                    CONFIG.xiti.filter_msite, period, start, end)
     # ANDROID
     LOGGER.info('Starting to get data for android platform')
-    get_leads_data(headers, CONFIG.xiti.site_android, CONFIG.xiti.columns_android,
-                   CONFIG.xiti.filter_android, period, start, end)
+    get_leads_data(
+        headers,
+        CONFIG.xiti.site_android,
+        CONFIG.xiti.columns_android,
+        CONFIG.xiti.filter_android,
+        period,
+        start,
+        end)
     # IOS
     LOGGER.info('Starting to get data for ios platform')
     get_leads_data(headers, CONFIG.xiti.site_ios, CONFIG.xiti.columns_ios,

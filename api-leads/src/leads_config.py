@@ -2,11 +2,10 @@ import environ
 
 
 @environ.config(prefix="APP")
-class AppConfig():
+class AppConfig:
     """
     AppConfig Class representing the configuration of the application
     """
-
 
     @environ.config(prefix="XITI")
     class XitiConfig:
@@ -18,12 +17,10 @@ class AppConfig():
         site_msite = environ.var("535499")
         site_android = environ.var("557231")
         site_ios = environ.var("557229")
-        api_url_count = environ.var("""
-            https://apirest.atinternet-solutions.com/data/v2/json/getRowCount
-        """)
-        api_url_data = environ.var("""
-            https://apirest.atinternet-solutions.com/data/v2/json/getData
-        """)
+        api_url_count = environ.var(
+            "https://apirest.atinternet-solutions.com/data/v2/json/getRowCount")
+        api_url_data = environ.var(
+            "https://apirest.atinternet-solutions.com/data/v2/json/getData")
         sort = environ.var("{-m_visitors}")
         columns_msite = environ.var("{cl_142578,cl_142563,m_visitors}")
         columns_android = environ.var("{cl_351206,cl_351209,m_visitors}")
@@ -31,7 +28,6 @@ class AppConfig():
         filter_msite = environ.var("{cl_142563:{$empty:false}}")
         filter_android = environ.var("{cl_351209:{$empty:false}}")
         filter_ios = environ.var("{cl_351195:{$empty:false}}")
-
 
     @environ.config(prefix="DB")
     class DBConfig:

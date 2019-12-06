@@ -7,13 +7,18 @@ if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
 
 set -e
 
-mkdir -p ${REPORT_ARTIFACTS}
-
-CHECKSTYLE_FILE=${REPORT_ARTIFACTS}/checkstyle-report.xml
-
 echoHeader "Running Checkstyle Tests"
 
-pylint -f json -r n src/ | ./scripts/pylint-to-checkstyle > ${CHECKSTYLE_FILE}
+if [[ -n "$TRAVIS" ]]; then
+    
+    mkdir -p ${REPORT_ARTIFACTS}
+
+    CHECKSTYLE_FILE=${REPORT_ARTIFACTS}/checkstyle-report.xml
+
+    pylint -f json -r n src/ | ./scripts/pylint-to-checkstyle > ${CHECKSTYLE_FILE}
+else
+    pylint -r n src/
+fi
 status=${PIPESTATUS[0]}
 
 # We need to catch error codes that are bigger then 2,

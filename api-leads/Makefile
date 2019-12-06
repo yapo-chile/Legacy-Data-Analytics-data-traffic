@@ -33,6 +33,12 @@ start-local:
 install:
 	pip install -r resources/requirements.txt
 
+
+# Run code pep8 formater
+## requires autopep8
+auto-format:
+	autopep8 --in-place --aggressive --aggressive -r src/
+
 # Execute style tests
 check-style:
 	@scripts/check-style.sh
