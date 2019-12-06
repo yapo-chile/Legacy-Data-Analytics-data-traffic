@@ -21,6 +21,7 @@ before_script:
 # in a modern Go project.
 script:
   - make -C api-leads docker-build
+  - make -C api-leads check-style
 after_failure:
   - reports-publisher
 
