@@ -11,7 +11,10 @@ docker-stop:
 
 ## Compiles all the services
 docker-build: build
-	#--no-cache
+
+docker-dev:
+	docker-compose -f docker-compose-dev.yml up -d
+	docker exec -it api_leads bash
 
 ## Publishes container
 docker-publish:
@@ -32,7 +35,6 @@ start-local:
 # Installs libraries locally
 install:
 	pip install -r resources/requirements.txt
-
 
 # Run code pep8 formater
 ## requires autopep8

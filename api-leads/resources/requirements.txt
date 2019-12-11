@@ -1,6 +1,6 @@
-requests
-psycopg2-binary
-pycodestyle
-autopep8
-environ-config
-pylint
+requests==2.22.0
+psycopg2-binary==2.8.4
+pycodestyle==2.5.0
+autopep8==1.4.4
+environ-config==19.1.0
+pylint==2.4.4

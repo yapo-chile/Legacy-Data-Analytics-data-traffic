@@ -1,13 +1,11 @@
 version: '2'
 services:
   api_leads:
-    image: bi.etl.xiti.leads:1.0
-    container_name: bi.etl.xiti.leads.container
-    build: .
-    networks:
-      - regress
-    ports:
-      - "3000:3000"
-networks:
-  regress:
-    external: true
+    image: containers.mpi-internal.com/yapo/api-leads:latest
+    container_name: api_leads
+    environment:
+      APP_XITI_SECRET: /keys/xiti_auth
+      APP_DB_SECRET: /keys/bnbiuser
+    volumes:
+      - /keys/xiti_auth:/keys/xiti_auth
+      - /keys/bnbiuser:/keys/bnbiuser
