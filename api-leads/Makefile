@@ -41,6 +41,9 @@ install:
 auto-format:
 	autopep8 --in-place --aggressive --aggressive -r src/
 
+rundeck-deploy:
+	@scripts/rundeck-deploy.sh
+
 # Execute style tests
 check-style:
 	@scripts/check-style.sh
