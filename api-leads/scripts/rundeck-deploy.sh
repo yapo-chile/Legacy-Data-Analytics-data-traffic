@@ -11,8 +11,4 @@ echoHeader "Deploying job definition to rundeck"
 
 set +e
 
-curl -X POST \
-  -H "Content-Type: application/yaml" \
-  -H "X-Rundeck-Auth-Token: ${RUNDECK_TOKEN}" \
-  -d "@${base_dir}/../deploy/api_leads.yaml" \
-  http://3.94.225.3:4440/api/18/project/data_jobs/jobs/import?fileformat=yaml&dupeOption=update&uuidOption=preserve
+cat ${base_dir}/../deploy/api_leads.yaml | xargs -I{} curl -X POST   'http://3.94.225.3:4440/api/14/project/data_jobs/jobs/import?fileformat=yaml&dupeOption=create&uuidOption=preserve'   -H 'Content-Type: application/yaml'   -H 'X-Rundeck-Auth-Token: 0gKxHfpkkL8q94XgwXWdKZDzyadIuM9F' --data-binary '{}'
