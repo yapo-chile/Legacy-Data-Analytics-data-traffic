@@ -11,4 +11,6 @@ echoHeader "Deploying job definition to rundeck"
 
 set +e
 
-cat ${base_dir}/../deploy/api_leads.yaml | curl -X POST 'http://3.94.225.3:4440/api/14/project/data_jobs/jobs/import?fileformat=yaml&dupeOption=update&uuidOption=preserve' -H 'Content-Type: application/yaml' -H 'X-Rundeck-Auth-Token: '${RUNDECK_TOKEN}'' --data-binary '@-'
+if [[ "${GIT_BRANCH_LOWERCASE}" == "master" ]]; then
+    cat ${base_dir}/../deploy/api_leads.yaml | curl -X POST 'http://3.94.225.3:4440/api/14/project/data_jobs/jobs/import?fileformat=yaml&dupeOption=update&uuidOption=preserve' -H 'Content-Type: application/yaml' -H 'X-Rundeck-Auth-Token: '${RUNDECK_TOKEN}'' --data-binary '@-'
+fi
