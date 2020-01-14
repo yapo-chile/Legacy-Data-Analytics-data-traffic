@@ -7,10 +7,12 @@
   nodeFilterEditable: false
   options:
     - name: database
+      hidden: true
       secure: true
       storagePath: keys/bnbiuser
       valueExposed: true
     - name: xiti
+      hidden: true
       secure: true
       storagePath: keys/xiti_auth
       valueExposed: true
