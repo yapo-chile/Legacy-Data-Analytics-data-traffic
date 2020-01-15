@@ -29,3 +29,4 @@ after_failure:
 after_success:
   - reports-publisher
   - make -C api-leads docker-publish
+  - make -C api-leads rundeck-deploy

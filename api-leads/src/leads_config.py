@@ -1,10 +1,6 @@
 import environ
 
 
-INI_XITI = environ.secrets.INISecrets.from_path_in_env("APP_XITI_SECRET")
-INI_DB = environ.secrets.INISecrets.from_path_in_env("APP_DB_SECRET")
-
-
 @environ.config(prefix="APP")
 class AppConfig:
     """
@@ -17,8 +13,7 @@ class AppConfig:
         XitiConfig class represeting the configuration to access the
         Xiti service
         """
-        authorization = INI_XITI.secret(
-            name="authorization", default=environ.var())
+        authorization = environ.var()
         site_msite = environ.var("535499")
         site_android = environ.var("557231")
         site_ios = environ.var("557229")
@@ -40,7 +35,7 @@ class AppConfig:
         DBConfig Class representing the configuration to access the database
         """
         name = environ.var("dw_blocketdb_ch")
-        password = INI_DB.secret(name="password", default=environ.var())
+        password = environ.var()
         user = environ.var("bnbiuser")
         host = environ.var("postgres")
     xiti = environ.group(XitiConfig)

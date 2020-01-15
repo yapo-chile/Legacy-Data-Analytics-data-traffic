@@ -1,0 +1,42 @@
+- defaultTab: nodes
+  description: 'Fetch the leads from xiti through an API'
+  executionEnabled: true
+  group: TEST
+  loglevel: INFO
+  name: api_leads
+  nodeFilterEditable: false
+  options:
+    - name: database
+      hidden: true
+      secure: true
+      storagePath: keys/bnbiuser
+      valueExposed: true
+    - name: xiti
+      hidden: true
+      secure: true
+      storagePath: keys/xiti_auth
+      valueExposed: true
+  nodefilters:
+    dispatch:
+      excludePrecedence: true
+      keepgoing: false
+      rankOrder: ascending
+      successOnEmptyNodeFilter: false
+      threadcount: '1'
+    filter: dockerhost
+  nodesSelectedByDefault: true
+  scheduleEnabled: true
+  sequence:
+    commands:
+    - args: ${option.database} ${option.xiti}
+      script: |+
+        db=$1
+        xiti=$2
+        docker run \
+            -it \
+            -e APP_DB_PASSWORD=$db \
+            -e APP_XITI_AUTHORIZATION=$xiti \
+            containers.mpi-internal.com/yapo/data-api-leads:latest \
+    keepgoing: false
+    strategy: node-first
+
