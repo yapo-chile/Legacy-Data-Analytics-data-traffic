@@ -144,6 +144,7 @@ if __name__ == '__main__':
  #   print('DATA_BLOCKET = ' + DATA_BLOCKET)
  #   DATA_ATHENA = source_data_pulse(PARAMS, CONFIG)
  #   print('DATA_ATHENA = ' + DATA_ATHENA)
+ 
  ## DAU Xiti
     DATA_DAU_XITI = source_data_dwh_dau_xiti(PARAMS, CONFIG)
     LOGGER.info('DATA_DAU_XITI extracted')
