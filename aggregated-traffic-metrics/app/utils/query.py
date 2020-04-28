@@ -466,7 +466,7 @@ class Query:
         Method that returns events of the day
         """
         command = """
-                    delete from dm_analysis.temp_traffic where 
+                    delete from dm_peak.traffic where 
                     timedate::date = 
                     '""" + self.params.get_date_from() + """'::date """
         return command
@@ -476,7 +476,7 @@ class Query:
         Method that returns events of the day
         """
         command = """
-                    delete from dm_analysis.temp_leads_per_user where 
+                    delete from dm_pulse.leads_per_user where 
                     timedate::date = 
                     '""" + self.params.get_date_from() + """'::date """
         return command
@@ -486,7 +486,7 @@ class Query:
         Method that returns events of the day
         """
         command = """
-                    delete from dm_analysis.temp_liquidity where 
+                    delete from dm_peak.liquidity where 
                     timedate::date = 
                     '""" + self.params.get_date_from() \
                          + """'::date + interval '-7 days' """

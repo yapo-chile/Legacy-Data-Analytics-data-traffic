@@ -138,36 +138,24 @@ if __name__ == '__main__':
  #                     EXTRACT                     #
  ###################################################
 
- #   DATA_DWH = source_data_dwh(PARAMS, CONFIG)
- #   print('DATA_DWH = ' + DATA_DWH)
- #   DATA_BLOCKET = source_data_blocket(PARAMS, CONFIG)
- #   print('DATA_BLOCKET = ' + DATA_BLOCKET)
- #   DATA_ATHENA = source_data_pulse(PARAMS, CONFIG)
- #   print('DATA_ATHENA = ' + DATA_ATHENA)
  ## DAU Xiti
     DATA_DAU_XITI = source_data_dwh_dau_xiti(PARAMS, CONFIG)
     LOGGER.info('DATA_DAU_XITI extracted')
- #  LOGGER.info(DATA_DAU_XITI.head(20))
  ## Leads Xiti
     DATA_LEADS_XITI = source_data_dwh_leads_xiti(PARAMS, CONFIG)
     LOGGER.info('DATA_LEADS_XITI extracted')
- #  LOGGER.info(DATA_LEADS_XITI.head(20))
  ## Traffic Pulse
     DATA_TRAFFIC_PULSE = source_data_dwh_traffic_pulse(PARAMS, CONFIG)
     LOGGER.info('DATA_TRAFFIC_PULSE extracted')
- #  LOGGER.info(DATA_TRAFFIC_PULSE.head(20))
  ## Unique Leads Pulse
     DATA_LEADS_PULSE = source_data_dwh_leads_pulse(PARAMS, CONFIG)
     LOGGER.info('DATA_LEADS_PULSE extracted')
- #  LOGGER.info(DATA_LEADS_PULSE.head(20))
  ## Unique Leads per user
     DATA_LEADS_PER_USER = source_data_pulse_leads_per_user(PARAMS, CONFIG)
     LOGGER.info('DATA_LEADS_PER_USER extracted')
- #  LOGGER.info(DATA_LEADS_PER_USER.head(20))
  ## Unique Liquidity
     DATA_LIQUIDITY = source_data_pulse_liquidity(PARAMS, CONFIG)
     LOGGER.info('DATA_LIQUIDITY extracted')
- #  LOGGER.info(DATA_LIQUIDITY.head(20))
 
  ###################################################
  #                   TRANSFORM                     #
@@ -187,7 +175,6 @@ if __name__ == '__main__':
                     "dau_pulse", "visits_pulse", "browsers_pulse",
                     "buyers_pulse", "unique_leads_pulse"]].astype(int)
     LOGGER.info('DF_TRAFFIC transformed')
- #  LOGGER.info(DF_TRAFFIC.head(20))
  ###################################################
  #                     LOAD                        #
  ###################################################
