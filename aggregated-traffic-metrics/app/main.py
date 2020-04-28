@@ -138,6 +138,7 @@ if __name__ == '__main__':
  #                     EXTRACT                     #
  ###################################################
 
+
  ## DAU Xiti
     DATA_DAU_XITI = source_data_dwh_dau_xiti(PARAMS, CONFIG)
     LOGGER.info('DATA_DAU_XITI extracted')
