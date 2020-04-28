@@ -1,16 +1,18 @@
 - defaultTab: nodes
   description: |-
+        sudo docker pull containers.mpi-internal.com/yapo/aggregated-traffic-metrics:latest
+
         sudo docker run -v /home/bnbiuser/secrets/pulse_auth:/app/pulse-secret \
                         -v /home/bnbiuser/secrets/dw_db:/app/db-secret \
                         -v /home/bnbiuser/secrets/blocket_db:/app/blocket-secret \
                         -e APP_PULSE_SECRET=/app/pulse-secret \
                         -e APP_DB_SECRET=/app/blocket-secret \
                         -e APP_DW_SECRET=/app/db-secret \
-                        containers.mpi-internal.com/yapo/data-traffic-aggregated-traffic-metrics:latest
+                        containers.mpi-internal.com/yapo/aggregated-traffic-metrics:latest
   executionEnabled: true
   group: GLOBAL-METRIC
   loglevel: DEBUG
-  name: Peak - aggregated-traffic-metrics
+  name: Peak - Aggregated-Traffic-Metrics
   nodeFilterEditable: false
   nodefilters:
     dispatch:
@@ -38,7 +40,7 @@
   schedule:
     month: '*'
     time:
-      hour: '08'
+      hour: '09'
       minute: '0'
       seconds: '0'
     weekday:
@@ -48,7 +50,7 @@
   sequence:
     commands:
     - script: |-
-        sudo docker pull containers.mpi-internal.com/yapo/data-traffic-aggregated-traffic-metrics:latest
+        sudo docker pull containers.mpi-internal.com/yapo/aggregated-traffic-metrics:latest
 
         sudo docker run -v /home/bnbiuser/secrets/pulse_auth:/app/pulse-secret \
                         -v /home/bnbiuser/secrets/dw_db:/app/db-secret \
@@ -56,7 +58,7 @@
                         -e APP_PULSE_SECRET=/app/pulse-secret \
                         -e APP_DB_SECRET=/app/blocket-secret \
                         -e APP_DW_SECRET=/app/db-secret \
-                        containers.mpi-internal.com/yapo/data-traffic-aggregated-traffic-metrics:latest
+                        containers.mpi-internal.com/yapo/aggregated-traffic-metrics:latest
     keepgoing: false
     strategy: node-first
   timeZone: America/Santiago

@@ -50,13 +50,13 @@ class AppConfig:
         name: str = INI_DW.secret(name="dbname", default=environ.var())
         user: str = INI_DW.secret(name="user", default=environ.var())
         password: str = INI_DW.secret(name="password", default=environ.var())
-    #   table_traffic: str = environ.var("dm_peak.traffic")
-    #   table_leads_per_user: str = environ.var("dm_pulse.leads_per_user")
-    #   table_liquidity: str = environ.var("dm_peak.liquidity")
-        table_traffic: str = environ.var("dm_analysis.temp_traffic")
-        table_leads_per_user: str = \
-            environ.var("dm_analysis.temp_leads_per_user")
-        table_liquidity: str = environ.var("dm_analysis.temp_liquidity")
+        table_traffic: str = environ.var("dm_peak.traffic")
+        table_leads_per_user: str = environ.var("dm_pulse.leads_per_user")
+        table_liquidity: str = environ.var("dm_peak.liquidity")
+    #   table_traffic: str = environ.var("dm_analysis.temp_traffic")
+    #   table_leads_per_user: str = \
+    #       environ.var("dm_analysis.temp_leads_per_user")
+    #   table_liquidity: str = environ.var("dm_analysis.temp_liquidity")
 
     athenaConf = environ.group(AthenaConfig)
     blocketConf = environ.group(DB_BlocketConfig)
