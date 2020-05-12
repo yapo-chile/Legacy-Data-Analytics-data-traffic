@@ -25,7 +25,29 @@
       threadcount: '1'
     filter: dockerhost
   nodesSelectedByDefault: true
+  notification:
+    onfailure:
+      email:
+        recipients: data_team@adevinta.com
+        subject: ${job.execid} ${execution.status} ${job.name} - Fallo definitivo
+    onretryablefailure:
+      email:
+        recipients: data_team@adevinta.com
+        subject: ${job.execid} ${execution.status} ${job.name} - Fallo por reintento
+  notifyAvgDurationThreshold: null
   scheduleEnabled: true
+  schedule:
+    month: '*'
+    time:
+      hour: '04'
+      minute: '30'
+      seconds: '0'
+    weekday:
+      day: '*'
+    year: '*'
+  retry:
+    retry: 3
+    delay: 20m
   sequence:
     commands:
     - args: ${option.database} ${option.xiti}
