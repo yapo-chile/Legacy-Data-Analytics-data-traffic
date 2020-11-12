@@ -17,7 +17,6 @@ class Query:
             where insert_date::date = '{date_from}'::date;
         """.format(date_from= self.params.get_date_from())
 
-
     def get_ad_reply_stg(self) -> str:
         query = """
             SELECT  ad.buyer_id_nk,

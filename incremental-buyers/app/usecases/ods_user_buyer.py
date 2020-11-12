@@ -53,7 +53,6 @@ class OdsUserBuyer():
             self.params.get_date_from()
         ))
         self.delete_users_of_day()
-        
 
         self.log.info('Starting ods_user_buyer step')
         self.data_buyers_ods = self.config.db
