@@ -74,13 +74,12 @@ class OdsUserBuyer():
             columns={'buyer_id_nk': 'user_id_nk'},
             inplace=True)
 
-        self.save_new_users()
         self.path_2 = self.data_buyers_ods[
             self.data_buyers_ods['user_id_pk'] != None
         ]
         self.path_2['user_creation_date'] = self.path_2.apply(
-            lambda x: x['buyer_creation_date'] if 
-            x['buyer_creation_date'] <= x['user_creation_date_aux']
+            lambda x: x['buyer_creation_date'] if  \
+            x['buyer_creation_date'] <= x['user_creation_date_aux'] \
             else x['user_creation_date_aux']
         )
         self.path_2 = self.path_2[[
@@ -88,5 +87,7 @@ class OdsUserBuyer():
             'user_creation_date',
             'buyer_creation_date',
             'update_date']]
+
+        self.save_new_users()
         self.update_users()
         self.log.info('Ending ods_user_buyer step')
