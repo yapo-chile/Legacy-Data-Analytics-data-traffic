@@ -6,7 +6,7 @@
                     -e APP_DW_SECRET=/app/dw-secret \
                     containers.mpi-internal.com/yapo/incremental-buyers:latest
   executionEnabled: true
-  group: Core
+  group: CORE
   loglevel: DEBUG
   name: Core - Buyers - User buyers and sellers 
   nodeFilterEditable: false

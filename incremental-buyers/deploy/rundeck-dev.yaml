@@ -4,9 +4,9 @@
         sudo docker run --rm --net=host \
                         -v /home/bnbiuser/secrets/dw_db:/app/dw-secret \
                         -e APP_DW_SECRET=/app/dw-secret \
-                        containers.mpi-internal.com/yapo/incremental-buyers:[git-branch]
+                        containers.mpi-internal.com/yapo/incremental-buyers:feat_incremental-buyers
   executionEnabled: true
-  group: Core
+  group: CORE
   loglevel: DEBUG
   name: Core - Buyers - User buyers and sellers
   nodeFilterEditable: false
@@ -24,11 +24,11 @@
   sequence:
     commands:
     - script: |-
-        sudo docker pull containers.mpi-internal.com/yapo/incremental-buyers:[git-branch]
+        sudo docker pull containers.mpi-internal.com/yapo/incremental-buyers:feat_incremental-buyers
         sudo docker run --rm --net=host \
                         -v /home/bnbiuser/secrets/dw_db:/app/dw-secret \
                         -e APP_DW_SECRET=/app/dw-secret \
-                        containers.mpi-internal.com/yapo/incremental-buyers:[git-branch] 
+                        containers.mpi-internal.com/yapo/incremental-buyers:feat_incremental-buyers
     keepgoing: false
     strategy: node-first
   timeZone: America/Santiago
