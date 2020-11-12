@@ -1,10 +1,10 @@
 - defaultTab: nodes
   description: |-
-        <Add specific URL or path of the pipeline in github>
+        https://github.mpi-internal.com/Yapo/data-traffic/incremental-buyers
         sudo docker run --rm --net=host \
-                        -v /home/bnbiuser/secrets/dw_db:/app/dw-secret \
-                        -e APP_DW_SECRET=/app/dw-secret \
-                        containers.mpi-internal.com/yapo/incremental-buyers:feat_incremental-buyers
+              -v /home/bnbiuser/secrets/dw_db:/app/dw-secret \
+              -e APP_DW_SECRET=/app/dw-secret \
+              containers.mpi-internal.com/yapo/incremental-buyers:feat_incremental-buyers
   executionEnabled: true
   group: CORE
   loglevel: DEBUG
@@ -26,9 +26,10 @@
     - script: |-
         sudo docker pull containers.mpi-internal.com/yapo/incremental-buyers:feat_incremental-buyers
         sudo docker run --rm --net=host \
-                        -v /home/bnbiuser/secrets/dw_db:/app/dw-secret \
-                        -e APP_DW_SECRET=/app/dw-secret \
-                        containers.mpi-internal.com/yapo/incremental-buyers:feat_incremental-buyers
+              -v /home/bnbiuser/secrets/dw_db:/app/dw-secret \
+              -e APP_DW_SECRET=/app/dw-secret \
+              containers.mpi-internal.com/yapo/incremental-buyers:feat_incremental-buyers \
+              -date_from = "2020-05-10"
     keepgoing: false
     strategy: node-first
   timeZone: America/Santiago

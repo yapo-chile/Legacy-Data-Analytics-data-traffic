@@ -1,6 +1,6 @@
 - defaultTab: nodes
   description: |-
-        <Add specific URL or path of the pipeline in github>
+        https://github.mpi-internal.com/Yapo/data-traffic/incremental-buyers
         sudo docker run --rm --net=host \
                     -v /home/bnbiuser/secrets/dw_db:/app/dw-secret \
                     -e APP_DW_SECRET=/app/dw-secret \

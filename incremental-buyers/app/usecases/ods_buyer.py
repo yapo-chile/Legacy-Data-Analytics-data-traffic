@@ -42,5 +42,5 @@ class OdsBuyer():
     def generate(self):
         self.log.info('Starting ods_buyer step')
         self.data_buyers = self.config.db
-        #self.save()
+        self.save()
         self.log.info('Ending ods_buyer step')

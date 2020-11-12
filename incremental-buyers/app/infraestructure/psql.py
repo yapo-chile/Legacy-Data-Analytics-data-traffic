@@ -165,7 +165,7 @@ class Database:
                         index=False)
             self.log.info('')
             self.log.info(sql_update)
-            #con.execute(sql_update)
+            con.execute(sql_update)
 
 
         
