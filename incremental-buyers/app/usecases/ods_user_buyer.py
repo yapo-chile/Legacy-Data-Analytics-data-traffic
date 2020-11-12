@@ -32,7 +32,11 @@ class OdsUserBuyer():
 
     def update_users(self) -> None:
         db = Database(conf=self.config.db)
-        db.update_table(self.path_2, 'ods', 'user')
+        db.update_table(
+            df=self.path_2,
+            schema='ods',
+            table='user',
+            union_key='user_id_pk')
         db.close_connection()
 
     @property
