@@ -85,11 +85,11 @@ class Query:
 
     def get_approval_of_sellers(self):
         query = """
-        select se.first_approval_date, us.user_id_pk
-        from ods.seller as se ,ods.user us
-        where se.seller_id_nk = us.user_id_nk
-            and us.seller_creation_date is not null
-            and us.first_approval_date is null
-            and se.first_approval_date is not null;
+            select se.first_approval_date, us.user_id_pk
+            from ods.seller as se ,ods.user us
+            where se.seller_id_nk = us.user_id_nk
+                and us.seller_creation_date is not null
+                and us.first_approval_date is null
+                and se.first_approval_date is not null;
         """
         return query

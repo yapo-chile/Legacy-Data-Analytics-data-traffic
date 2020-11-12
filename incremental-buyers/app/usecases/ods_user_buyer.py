@@ -19,7 +19,7 @@ class OdsUserBuyer():
     def delete_users_of_day(self):
         query = Query(self.config, self.params)
         db = Database(conf=self.config.db)
-        db.excecute_command(
+        db.execute_command(
             query.delete_records_users()
         )
         db.close_connection()
