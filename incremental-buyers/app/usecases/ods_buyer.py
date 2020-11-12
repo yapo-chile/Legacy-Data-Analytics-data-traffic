@@ -18,7 +18,11 @@ class OdsBuyer():
     def save(self) -> None:
         query = Query(self.config, self.params)
         db = Database(conf=self.config.db)
-        db.insert_copy(self.data_buyers, 'ods', 'buyer')
+        db.insert_copy(
+            df=self.data_buyers,
+            schema='ods',
+            table='buyer'
+        )
         db.close_connection()
 
     # Query data from data warehouse
