@@ -140,8 +140,8 @@ class Database:
             for col in df.columns:
                 if col in keys:
                     continue
-                columns = columns + ' f.{col} = t.{col} '.format(col=col)
-            columns = columns[:-2]
+                columns = columns + ' f.{col} = t.{col},'.format(col=col)
+            columns = columns[:-1]
 
             sql_update = """
                 UPDATE {sch}.{tbl} AS f
