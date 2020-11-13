@@ -4,7 +4,6 @@ import logging
 from infraestructure.conf import getConf
 from utils.read_params import ReadParams
 from utils.time_execution import TimeExecution
-from usecases.ods_buyer import OdsBuyer
 from usecases.ods_user_buyer import OdsUserBuyer
 from usecases.ods_user_seller import OdsUserSeller
 
