@@ -126,7 +126,7 @@ class Database:
             if isinstance(union_key , list):
                 keys = '' 
                 for key in union_key:
-                    keys = keys + ' f.{col} = t.{col} and'.format(col=key)
+                    keys = keys + ' {col} = t.{col} and'.format(col=key)
                 keys = keys[:-3]
             elif isinstance(union_key , str):
                 keys = union_key
@@ -140,14 +140,14 @@ class Database:
             for col in df.columns:
                 if col in keys:
                     continue
-                columns = columns + ' f.{col} = t.{col},'.format(col=col)
+                columns = columns + ' {col} = t.{col},'.format(col=col)
             columns = columns[:-1]
 
             sql_update = """
-                UPDATE {sch}.{tbl} AS f
+                UPDATE {sch}.{tbl}
                 SET {cols}
                 FROM tmp_{tbl} AS t
-                WHERE f.{un_key} = t.{un_key}
+                WHERE {un_key} = t.{un_key}
             """.format(
                 sch=schema,
                 tbl=table,
