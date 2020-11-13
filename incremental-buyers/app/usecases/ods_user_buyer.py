@@ -80,7 +80,7 @@ class OdsUserBuyer():
 
         self.path_2['user_creation_date'] = self.path_2.apply(
             lambda x: x['buyer_creation_date'] 
-                if x['buyer_creation_date'] <= x['user_creation_date_aux'] 
+                if (x['buyer_creation_date'] <= x['user_creation_date_aux'])
                 else x['user_creation_date_aux'],
             axis=1
         )
