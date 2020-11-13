@@ -86,7 +86,8 @@ class OdsUserSeller():
         self.path_2['user_creation_date'] = self.path_2.apply(
             lambda x: x['seller_creation_date'] if 
             x['seller_creation_date'] <= x['user_creation_date_aux']
-            else x['user_creation_date_aux']
+            else x['user_creation_date_aux'],
+            axis=1
         )
         self.path_2['first_approval_date'] = self.\
             path_2['first_approval_date'].apply(
