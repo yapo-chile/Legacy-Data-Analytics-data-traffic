@@ -78,8 +78,6 @@ class OdsUserBuyer():
             self.data_buyers_ods['user_id_pk'] != None
         ]
 
-        self.log.info(self.path_2.columns)
-
         self.path_2['user_creation_date'] = self.path_2.apply(
             lambda x: x['buyer_creation_date'] 
                 if x['buyer_creation_date'] <= x['user_creation_date_aux'] 
