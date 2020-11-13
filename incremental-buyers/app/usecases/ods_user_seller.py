@@ -58,7 +58,11 @@ class OdsUserSeller():
 
     def update_users_aproval_date(self):
         db = Database(conf=self.config.db)
-        db.update_table(self.data_aproval_sellers, 'ods', 'user')
+        db.update_table(
+            df=self.data_aproval_sellers,
+            schema='ods',
+            table='user',
+            union_key='user_id_pk')
         db.close_connection()
 
     def generate(self):
@@ -83,7 +87,6 @@ class OdsUserSeller():
         self.path_2 = self.data_sellers_ods[
             self.data_sellers_ods['user_id_pk'] != None
         ]
-
         self.log.info(self.path_2.columns)
         self.path_2['user_creation_date'] = self.path_2.apply(
             lambda x: x['seller_creation_date']
@@ -98,7 +101,6 @@ class OdsUserSeller():
         self.path_2.rename(
             columns={'seller_id_nk': 'user_id_nk'},
             inplace=True)
-
         self.path_2 = self.path_2[[
             'user_id_pk',
             'user_creation_date',
