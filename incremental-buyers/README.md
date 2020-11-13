@@ -4,17 +4,24 @@
 
 ## Description
 
-Introduce here information about the purpose of this ETL, what kind of information it extracts and from where (dwh, pulse, blocket DB, service DB, specifics files, etc) and also specify other important tecnical details such as: execution preconditions, considerations about execution schedule.
+Process migrate of incremental process that contain four phases:
+
+- ods_buyer: get data from stg.ad_reply and ods.ad to extract information about new buyers and insert in table ods.buyers.
+
+- ods_users_buyers: This step get data of buyers to complete dimension of users. In this process first delete data inserted in the day of processing in ods.users to clean in case of reprocessing, then get data of ods.buyers (inserted in last step) joined with ods.users, if the buyer is in ods.user, make an update of record, in other case, insert a new reg with buyer info.
+
+- ods_users_sellers: This step get data of sellers to complete dimension of users. In this process get data of ods.sellers (inserted in last step) joined with ods.users, if the seller is in ods.user, make an update of record, in other case, insert a new register with buyer info. Finally, get registers of users with first_approval_date null, but joined with sellers with first_approval_date not null and make a update with this value in ods.users.
+
 
 ## Pipeline Implementation Details
 
 |   Field           | Description                                                                |
 |-------------------|----------------------------------------------------------------------------|
-| Input Source      | Specify type of source and/or table names                                  |
-| Output Source     | Specify type of source and/or table names                                  |
-| Schedule          | hh:mm                                                                      |
-| Rundeck Access    | Specify rundeck environment (test/data jobs) and rundeck ETL name          |
-| Associated Report | Specify name and URL of tableau report (if applies)                        |
+| Input Source      | stg.ad_reply, ods.ad, ods.buyer, ods.user, ods.seller                      |
+| Output Source     | ods.user                                                                   |
+| Schedule          | -:-                                                                        |
+| Rundeck Access    | data jobs- CORE/Core - Buyers - User buyers and sellers                    |
+| Associated Report | -                                                                          |
 
 
 ### Build

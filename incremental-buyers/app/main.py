@@ -20,7 +20,6 @@ if __name__ == '__main__':
     PARAMS = ReadParams(sys.argv)
     TIME.get_time()
     # Calling main process
-    OdsBuyer(CONFIG, PARAMS).generate()
     OdsUserBuyer(CONFIG, PARAMS).generate()
     OdsUserSeller(CONFIG, PARAMS).generate()
     # End process

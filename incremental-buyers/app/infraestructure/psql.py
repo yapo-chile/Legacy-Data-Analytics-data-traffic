@@ -147,7 +147,7 @@ class Database:
                 UPDATE {sch}.{tbl}
                 SET {cols}
                 FROM tmp_{tbl} AS t
-                WHERE {tbl}.{un_key} = t.{un_key}
+                WHERE {sch}.{tbl}.{un_key} = t.{un_key}
             """.format(
                 sch=schema,
                 tbl=table,
