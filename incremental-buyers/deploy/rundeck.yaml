@@ -8,7 +8,7 @@
   executionEnabled: true
   group: CORE
   loglevel: DEBUG
-  name: Core - Buyers - User buyers and sellers 
+  name: Core - User buyers and sellers 
   nodeFilterEditable: false
   nodefilters:
     dispatch:
@@ -31,16 +31,7 @@
           webhook_token: T017F9KHA1Y/B01BL7C1CSY/Ai9NzdCrBUA5Ru5sa8JHYrjR
         type: SlackNotification
   notifyAvgDurationThreshold: null
-  schedule:
-    month: '*'
-    time:
-      hour: '03'
-      minute: '0'
-      seconds: '0'
-    weekday:
-      day: '*'
-    year: '*'
-  scheduleEnabled: true
+  scheduleEnabled: false
   sequence:
     commands:
     - script: |-
