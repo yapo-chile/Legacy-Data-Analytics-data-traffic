@@ -16,7 +16,7 @@ class DwhQuery:
         """
         Method return str with query
         """
-        query = """select 
+        query = """select
                 distinct email 
             from ods.ad a
             left join (select distinct seller_id_fk from  ods.ad a 
