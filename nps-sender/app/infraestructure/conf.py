@@ -1,3 +1,4 @@
+# pylint: disable=no-member
 import environ
 
 INI_BLOCKET = environ.secrets.INISecrets.from_path_in_env("APP_BLOCKET_SECRET")
