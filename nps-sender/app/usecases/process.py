@@ -1,7 +1,6 @@
 # pylint: disable=no-member
 # utf-8
 import logging
-from infraestructure.psql import Database
 from utils.read_params import ReadParams
 from usecases.sender import NpsSender
 
