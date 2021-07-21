@@ -3,9 +3,9 @@
         Etl that reads sellers that ended an ad so an survey would be send to their emails \
         https://github.mpi-internal.com/Yapo/data-traffic \
         sudo docker run --rm --net=host \
-                        -v /home/bnbiuser/secrets/dw_db:/app/db-secret \
+                        /home/bnbiuser/secrets/blocket_db:/app/db-blocket \
                         -v /home/bnbiuser/secrets/zendesk_auth:/app/survey \
-                        -e APP_DB_SECRET=/app/db-secret \
+                        -e APP_BLOCKET_SECRET=/app/db-blocket \
                         -e APP_SURVEY_SECRET=/app/survey \
                         containers.mpi-internal.com/yapo/nps-sender:feat_nps-sender
   executionEnabled: true
@@ -29,9 +29,9 @@
     - script: |-
         sudo docker pull containers.mpi-internal.com/yapo/nps-sender:feat_nps-sender
         sudo docker run --rm --net=host \
-            -v /home/bnbiuser/secrets/dw_db:/app/db-secret \
+            /home/bnbiuser/secrets/blocket_db:/app/db-blocket \
             -v /home/bnbiuser/secrets/zendesk_auth:/app/survey \
-            -e APP_DB_SECRET=/app/db-secret \
+            -e APP_BLOCKET_SECRET=/app/db-blocket \
             -e APP_SURVEY_SECRET=/app/survey \
             containers.mpi-internal.com/yapo/nps-sender:feat_nps-sender
     keepgoing: false

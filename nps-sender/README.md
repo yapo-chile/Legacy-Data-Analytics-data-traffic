@@ -4,15 +4,16 @@
 
 ## Description
 
-Introduce here information about the purpose of this ETL, what kind of information it extracts and from where (dwh, pulse, blocket DB, service DB, specifics files, etc) and also specify other important tecnical details such as: execution preconditions, considerations about execution schedule.
+Reads email from sellers that ended an ad so then a survey would be delivery
+to their email
 
 ## Pipeline Implementation Details
 
 |   Field           | Description                                                                |
 |-------------------|----------------------------------------------------------------------------|
-| Input Source      | Specify type of source and/or table names                                  |
-| Output Source     | Specify type of source and/or table names                                  |
-| Schedule          | hh:mm                                                                      |
+| Input Source      | blocket                                             |
+| Output Source     | surveypal api                                       |
+| Schedule          | 07:00                                               |
 | Rundeck Access    | Specify rundeck environment (test/data jobs) and rundeck ETL name          |
 | Associated Report | Specify name and URL of tableau report (if applies)                        |
 
