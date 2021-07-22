@@ -29,7 +29,7 @@ class AppConfig:
         api_key: str = SURVEY_SECRET.secret(name="authorization", default=environ.var())
         survey_id: str = SURVEY_SECRET.secret(name="survey_id", default=environ.var())
 
-    db = environ.group(DBConfig)
+    db = environ.group(BlocketConfig)
     survey = environ.group(SurveypalConfig)
 
 def getConf():
