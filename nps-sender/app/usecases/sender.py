@@ -28,7 +28,7 @@ class NpsSender(DwhQuery):
         self.__dwh_data_emails = dwh_data_emails
 
     def send_emails(self, x):
-        survey_id = self.config.survey.survey_id
+        survey_id = str(self.config.survey.survey_id)
         link = "https://my.surveypal.com/api/rest/survey/" + \ 
                 survey_id + "/answer/email/invite?email=" + \
                 x['email'] + \
