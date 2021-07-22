@@ -10,7 +10,7 @@ class AppConfig:
     AppConfig Class representing the configuration of the application
     """
 
-   @environ.config(prefix="BLOCKET")
+    @environ.config(prefix="BLOCKET")
     class BlocketConfig:
         """
         DBConfig Class representing the configuration to access the database
