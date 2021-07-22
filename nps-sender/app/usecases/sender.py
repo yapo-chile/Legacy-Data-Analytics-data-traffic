@@ -29,11 +29,7 @@ class NpsSender(DwhQuery):
 
     def send_emails(self, x):
         survey_id = str(self.config.survey.survey_id)
-        link = "https://my.surveypal.com/api/rest/survey/" + \ 
-                survey_id + "/answer/email/invite?email=" + \
-                x['email'] + \
-            "&subject=Nos%20gustar%C3%ADa%20saber%20" + \
-            "tu%20experiencia%20al%20vender%20en%20Yapo.cl"
+        link = "https://my.surveypal.com/api/rest/survey/" + survey_id + "/answer/email/invite?email=" + x['email'] + "&subject=Nos%20gustar%C3%ADa%20saber%20tu%20experiencia%20al%20vender%20en%20Yapo.cl"
         headers = {"X-Auth-Token": self.config.survey.api_key,
                    "Accept": "application/json"}
         requests.put(link, headers=headers)
