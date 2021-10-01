@@ -406,7 +406,7 @@ class Query:
             from 
                 (
                 select
-                    e.ad_id,
+                    ad_id,
                     case when e.local_main_category in ('vehiculos','vehículos','veh�culos') then 'Motor' 
                          when e.local_category_level1 in ('arriendo de temporada') and e.local_main_category in ('inmuebles') then 'Holiday Rental' 
                          when e.local_category_level1 in ('ofertas de empleo') and e.local_main_category in ('servicios','servicios negocios y empleo','servicios, negocios y empleo','servicios,negocios y empleo') then 'Jobs'
@@ -435,7 +435,7 @@ class Query:
                 group by 1,2,3
                 union all
                 select
-                    e.ad_id,
+                    ad_id,
                     'All Yapo' vertical,
                     cast(date_parse(cast(a.year as varchar) || '-' || cast(a.month as varchar) || '-' || cast(a.day as varchar),'%Y-%c-%e') as date) insertion_date,
                     date_diff ('day', cast(date_parse(cast(a.year as varchar) || '-' || cast(a.month as varchar) || '-' || cast(a.day as varchar),'%Y-%c-%e') as date) , min(cast(date_parse(cast(a.year as varchar) || '-' || cast(a.month as varchar) || '-' || cast(a.day as varchar),'%Y-%c-%e') as date)) ) days_first_lead
